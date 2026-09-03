@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>币透 CoinLens · AI 加密货币研究台</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◎</span>
+    <span class="brand-name">币透<i>COINLENS</i></span>
+    <span class="brand-sub">AI 加密货币研究台</span>
+  </div>
+  <div class="topbar-right">
+    <span id="llm-chip" class="chip chip-dim">检查中…</span>
+  </div>
+</header>
+
+<div id="llm-banner" class="banner" hidden>
+  未配置 LLM_API_KEY：报告将只有数据简报，没有 AI 分析。在项目根目录
+  <code>.env</code> 填入后重启即可启用（方法见 README）。
+</div>
+
+<main class="layout">
+
+  <aside class="rail">
+    <section class="panel">
+      <h2 class="panel-title">研究请求</h2>
+      <div class="chips" id="symbol-chips">
+        <button data-sym="BTC">BTC</button><button data-sym="ETH">ETH</button>
+        <button data-sym="SOL">SOL</button><button data-sym="BNB">BNB</button>
+        <button data-sym="XRP">XRP</button><button data-sym="DOGE">DOGE</button>
+        <button data-sym="ADA">ADA</button><button data-sym="LINK">LINK</button>
+      </div>
+      <label class="field">
+        <span class="field-label">交易对</span>
+        <input id="symbol-input" placeholder="如 BTC / ETH / SOL" autocomplete="off"
+               spellcheck="false" maxlength="12">
+      </label>
+      <label class="field">
+        <span class="field-label">想弄清的问题（可选）</span>
+        <textarea id="question-input" rows="3" maxlength="500"
+                  placeholder="例：本周 BTC 走势怎么看？回调到 MA25 能不能接？"></textarea>
+      </label>
+      <button id="run-btn" class="run-btn">开始研究</button>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">历史报告</h2>
+      <ul id="history-list" class="history"></ul>
+    </section>
+  </aside>
+
+  <section class="stage-main">
+
+    <div id="empty-state" class="empty">
+      <p class="empty-kicker">看透一个标的的四个维度</p>
+      <h1 class="empty-title">输入交易对，<br>拿到一份四维研报</h1>
+      <ol class="empty-steps">
+        <li><b>选定标的</b>——任意 USDT 现货交易对</li>
+        <li><b>提出问题</b>——可选，研究员会针对性回答</li>
+        <li><b>等待 30–90 秒</b>——采集 → 计算 → 四维分析 → 综合研判</li>
+      </ol>
+      <p class="empty-note">报告由公开数据自动聚合、大模型解读，仅供研究参考，不构成投资建议。</p>
+    </div>
+
+    <div id="progress-panel" class="panel progress-panel" hidden>
+      <p class="progress-title">正在研究 <span id="progress-symbol" class="mono"></span></p>
+      <ol id="stage-list" class="stage-list"></ol>
+      <p class="progress-hint" id="progress-hint"></p>
+    </div>
+
+    <div id="error-panel" class="panel error-panel" hidden></div>
+
+    <article id="report" hidden></article>
+
+  </section>
+</main>
+
+<footer class="footer">
+  数据源：Binance 公开行情 / OKX 衍生品 / alternative.me 恐贪指数 / Cointelegraph ·
+  报告仅供研究参考，不构成投资建议
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
